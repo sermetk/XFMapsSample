@@ -8,28 +8,14 @@ namespace XFMapsSample
 {
     public class SelectLocationPageViewModel : BindingBase
     {
-        private bool _isRouteMode;
-        public bool IsRouteMode
-        {
-            get { return _isRouteMode; }
-            set { _isRouteMode = value; OnPropertyChanged(); }
-        }
-
-        public ICommand SelectModeCommand { get; set; }
-        public ICommand RouteModeCommand { get; set; }
+        public ICommand NextPageCommand { get; set; }
 
         public SelectLocationPageViewModel()
         {
-            SelectModeCommand = new Command(() =>
+            NextPageCommand = new Command(() =>
             {
-                IsRouteMode = false;
+                
             });
-
-            RouteModeCommand = new Command(() =>
-            {
-                IsRouteMode = true;
-            });
-
         }
     }
 }
