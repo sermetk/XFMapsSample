@@ -6,6 +6,21 @@
              mc:Ignorable="d"
              x:Class="XFMapsSample.App">
     <Application.Resources>
-
+        
+            <OnPlatform x:Key="MaterialIcon" x:TypeArguments="x:String">
+                <On Platform="Android" Value="MaterialIcons-Regular.ttf#Material Icon" />
+                <On Platform="iOS" Value="MaterialIcons-Regular" />
+            </OnPlatform>
+        
+            <Style x:Key="LabelIconStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource MaterialIcon}" />
+                <Setter Property="FontSize" Value="{OnIdiom Phone='24', Tablet='28'}" />
+                <Setter Property="TextColor" Value="Teal" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+        
+        
+            <x:String x:Key="chevron_right_icon">&#xe5cc;</x:String>
+            <x:String x:Key="location_on_icon">&#xe0c8;</x:String>
     </Application.Resources>
 </Application>

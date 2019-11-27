@@ -10,7 +10,7 @@ namespace XFMapsSample
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new SelectLocationPage());
+            MainPage = new NavigationPage(new SelectLocationPage()) { BarBackgroundColor = Color.Teal, BarTextColor = Color.White };
         }
     }
 }

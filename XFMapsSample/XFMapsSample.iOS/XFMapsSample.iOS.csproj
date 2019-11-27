@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>x86_64</MtouchArch>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
@@ -134,9 +134,12 @@
       <Name>XFMapsSample</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CustomRenderer\" />
+  </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\location_person.png" />
     <BundleResource Include="Resources\location_store_mall.png" />
+    <BundleResource Include="Resources\MaterialIcons-Regular.ttf" />
   </ItemGroup>
 </Project>

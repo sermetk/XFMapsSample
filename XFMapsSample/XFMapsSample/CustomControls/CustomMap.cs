@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using XFMapsSample.Models;
 
 namespace XFMapsSample
 {
@@ -47,8 +48,14 @@ namespace XFMapsSample
         {
             if (!AreaWithin(e.Position))
             {
-                Application.Current.MainPage.DisplayAlert("Warning", "We cannot service your chosen region", "Ok");
+                Application.Current.MainPage.DisplayAlert("Warning", "We cannot service your chosen region", "Okay");
                 return;
+            }
+
+            if (BindingContext is SelectLocationPageViewModel selectLocationVm)
+            {
+                selectLocationVm.SelectedLocation = new Location { lat = e.Position.Latitude, lng = e.Position.Longitude };
+                selectLocationVm.SelectionMode = SelectLocationPageViewModel.AddressSelectionMode.Click;
             }
 
             if (RoutePins.Count == 2)

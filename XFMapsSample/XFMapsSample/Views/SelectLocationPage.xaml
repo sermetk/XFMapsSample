@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="XFMapsSample.SelectLocationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:XFMapsSample.Converters"
+    xmlns:local="clr-namespace:XFMapsSample"
+    x:Name="SelectLocationPageRoot"
+    Title="Address Sample">
+    <ContentPage.BindingContext>
+        <local:SelectLocationPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ZeroToHiddenConverter x:Key="ZeroToHiddenConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="90" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="350" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <SearchBar
+                Grid.ColumnSpan="3"
+                BackgroundColor="White"
+                CancelButtonColor="Red"
+                IsSpellCheckEnabled="False"
+                Placeholder="Find Address"
+                SearchCommand="{Binding AddressSearchCommand}"
+                Text="{Binding SearchBarText}"
+                TextColor="Gray">
+                <SearchBar.Margin>
+                    <OnPlatform Android="0,0,0,-5" />
+                </SearchBar.Margin>
+            </SearchBar>
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                BackgroundColor="Orange" />
+            <Frame
+                Grid.Row="3"
+                Grid.Column="1"
+                Margin="0,21,0,21"
+                Padding="8"
+                BackgroundColor="White"
+                BorderColor="Teal"
+                CornerRadius="20"
+                HasShadow="False"
+                VerticalOptions="End">
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Margin="5,0,0,0"
+                        Text="My Address is Here"
+                        TextColor="Teal" />
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource LabelIconStyle}"
+                        Text="{StaticResource chevron_right_icon}" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NextCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NextCommand}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <local:CustomMap
+                x:Name="Map"
+                Grid.Row="2"
+                Grid.ColumnSpan="3"
+                IsEnabled="{Binding PlaceSearchAutoComplete.Count, Converter={StaticResource ZeroToHiddenConverter}, ConverterParameter='reverse'}" />
+            <Grid  Grid.Row="2"
+                   Padding="125"
+                   IsVisible="{Binding IsBusy}"
+                   Grid.Column="1">
+                    <ActivityIndicator Color="Teal"
+                                       IsRunning="{Binding IsBusy}"/>
+            </Grid>
+            <ListView
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="3"
+                Margin="0,50.5,0,0"
+                BackgroundColor="White"
+                HorizontalScrollBarVisibility="Never"
+                IsVisible="{Binding PlaceSearchAutoComplete.Count, Converter={StaticResource ZeroToHiddenConverter}}"
+                ItemsSource="{Binding PlaceSearchAutoComplete}"
+                RowHeight="42"
+                SeparatorVisibility="None"
+                VerticalOptions="Start"
+                VerticalScrollBarVisibility="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnSpacing="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="58" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.RowSpan="2"
+                                    Margin="25,0,0,0"
+                                    Style="{StaticResource LabelIconStyle}"
+                                    Text="{StaticResource location_on_icon}"
+                                    TextColor="{Binding SuggestionTypeColor}"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Column="1"
+                                    Margin="0,0,10,0"
+                                    FontAttributes="Bold"
+                                    Text="{Binding structured_formatting.main_text}"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,0,10,0"
+                                    Text="{Binding description}"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="2"
+                                    BackgroundColor="Gray" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.PlacePredictionSelectCommand, Source={x:Reference SelectLocationPageRoot}}" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

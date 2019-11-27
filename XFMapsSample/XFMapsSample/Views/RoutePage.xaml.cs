@@ -5,11 +5,10 @@ using Xamarin.Forms;
 
 namespace XFMapsSample
 {
-    public partial class SelectLocationPage : ContentPage
+    public partial class RoutePage : ContentPage
     {
-        public SelectLocationPage()
+        public RoutePage()
         {
-            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
         }
     }
