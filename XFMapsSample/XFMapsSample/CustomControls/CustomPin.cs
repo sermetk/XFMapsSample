@@ -3,5 +3,8 @@ using Xamarin.Forms.Maps;
 
 namespace XFMapsSample
 {
-    public class CustomPin : Pin    {        public string ImageUrl { get; set; }    }
+    public class CustomPin : Pin
+    {
+        public string ImageUrl { get; set; }
+    }
 }

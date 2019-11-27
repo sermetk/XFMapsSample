@@ -7,10 +7,18 @@ using XFMapsSample.Models;
 
 namespace XFMapsSample
 {
-    public class CustomMap : Map    {
+    public class CustomMap : Map
+    {
         public readonly List<CustomPin> RoutePins;
 
-        public List<Position> AvailableRegions;        public CustomMap()        {            RoutePins = new List<CustomPin>();            var myStorePosition = new Position(41.0112841745965, 28.972308850524);            MoveToRegion(MapSpan.FromCenterAndRadius(myStorePosition, Distance.FromKilometers(2)));            AddRegionBorders();
+        public List<Position> AvailableRegions;
+
+        public CustomMap()
+        {
+            RoutePins = new List<CustomPin>();
+            var myStorePosition = new Position(41.0112841745965, 28.972308850524);
+            MoveToRegion(MapSpan.FromCenterAndRadius(myStorePosition, Distance.FromKilometers(2)));
+            AddRegionBorders();
             var pin = new CustomPin
             {
                 Label = "Store Address",
@@ -19,7 +27,9 @@ namespace XFMapsSample
                 ImageUrl = "location_store_mall.png"
             };
             RoutePins.Add(pin);
-            Pins.Add(pin);            MapClicked += OnMapClicked;        }
+            Pins.Add(pin);
+            MapClicked += OnMapClicked;
+        }
 
         private void AddRegionBorders()
         {
@@ -62,11 +72,20 @@ namespace XFMapsSample
             {
                 RoutePins.Remove(RoutePins[1]);
                 Pins.Remove(Pins[1]);
-            }            var pin = new CustomPin            {                Label = "Selected Address",                Position = e.Position,                Type = PinType.SavedPin,
+            }
+
+            var pin = new CustomPin
+            {
+                Label = "Selected Address",
+                Position = e.Position,
+                Type = PinType.SavedPin,
                 ImageUrl = "location_person.png"
             };
 
-            RoutePins.Add(pin);            Pins.Add(pin);            MoveToRegion(MapSpan.FromCenterAndRadius(e.Position, Distance.FromKilometers(2)));
+            RoutePins.Add(pin);
+            Pins.Add(pin);
+
+            MoveToRegion(MapSpan.FromCenterAndRadius(e.Position, Distance.FromKilometers(2)));
         }
 
         public bool AreaWithin(Position selectedPosition)
