@@ -68,10 +68,13 @@ namespace XFMapsSample
                 selectLocationVm.SelectionMode = SelectLocationPageViewModel.AddressSelectionMode.Click;
             }
 
-            if (RoutePins.Count == 2)
+            if (RoutePins.Count > 1)
             {
-                RoutePins.Remove(RoutePins[1]);
-                Pins.Remove(Pins[1]);
+                for (int i = 1; i < RoutePins.Count; i++)
+                {
+                    RoutePins.RemoveAt(i);
+                }
+                Pins.RemoveAt(1);
             }
 
             var pin = new CustomPin

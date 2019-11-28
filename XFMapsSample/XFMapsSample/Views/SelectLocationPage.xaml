@@ -81,12 +81,12 @@
                 Grid.Row="2"
                 Grid.ColumnSpan="3"
                 IsEnabled="{Binding PlaceSearchAutoComplete.Count, Converter={StaticResource ZeroToHiddenConverter}, ConverterParameter='reverse'}" />
-            <Grid  Grid.Row="2"
-                   Padding="125"
-                   IsVisible="{Binding IsBusy}"
-                   Grid.Column="1">
-                    <ActivityIndicator Color="Teal"
-                                       IsRunning="{Binding IsBusy}"/>
+            <Grid
+                Grid.Row="2"
+                Grid.Column="1"
+                Padding="125"
+                IsVisible="{Binding IsBusy}">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" Color="Teal" />
             </Grid>
             <ListView
                 Grid.RowSpan="3"

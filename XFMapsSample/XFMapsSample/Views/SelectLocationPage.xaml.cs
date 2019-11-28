@@ -30,6 +30,14 @@ namespace XFMapsSample
         }
         private void InsertPin(double latitude, double longtitude)
         {
+            if (Map.RoutePins.Count > 1)
+            {
+                for (int i = 1; i < Map.RoutePins.Count; i++)
+                {
+                    Map.RoutePins.RemoveAt(i);
+                }
+                Map.Pins.RemoveAt(1);
+            }
             var position = new Position(latitude, longtitude);
             var pin = new CustomPin
             {
@@ -39,33 +47,35 @@ namespace XFMapsSample
                 ImageUrl = "location_person.png"
             };
 
-            if (Map.RoutePins.Count == 1)
-            {
-                Map.RoutePins.Add(pin);
-                Map.Pins.Add(pin);
-            }
-            else
-            {
-                Map.RoutePins[1] = pin;
-                Map.Pins[1] = pin;
-            }
+            Map.RoutePins.Add(pin);
+            Map.Pins.Add(pin);
 
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(Map.Pins[1].Position.Latitude, Map.Pins[1].Position.Longitude), Distance.FromKilometers(2)));
         }
 
         private void DrawRoute(List<Models.Location> steps)
         {
-            for (int i = 1; i < steps.Count -1; i++)
+            Map.RoutePins.Clear();
+            Map.Pins.Clear();
+            foreach (var coordinates in steps)
             {
-                var position = new Position(steps[i].lat, steps[i].lng);
+                var position = new Position(coordinates.lat, coordinates.lng);
                 var pin = new CustomPin
                 {
                     Position = position,
                     Label = "Selected Address",
                     Type = PinType.SavedPin
                 };
-                Map.RoutePins.Insert(i,pin);
-            }           
+                Map.RoutePins.Add(pin);
+            }
+            var firstPin = Map.RoutePins.First();
+            var lastPin = Map.RoutePins.Last();
+            firstPin.Label = "Store Address";
+            lastPin.Label = "Selected Address";
+            firstPin.ImageUrl = "location_store_mall.png";
+            lastPin.ImageUrl = "location_person.png";
+            Map.Pins.Add(firstPin);
+            Map.Pins.Add(lastPin);
         }
     }
 }

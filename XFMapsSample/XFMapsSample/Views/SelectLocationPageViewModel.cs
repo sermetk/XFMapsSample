@@ -228,7 +228,7 @@ namespace XFMapsSample
             var result = await Service.GetRoute("place_id:" + GooglePlaceId);
             if (result.status == "OK")
             {
-                var routeCoordinates = new List<Location> { new Location() };
+                var routeCoordinates = new List<Location>();
                 foreach (var route in result.routes.FirstOrDefault().legs.FirstOrDefault().steps)
                 {
                     routeCoordinates.Add(new Location { lat = route.start_location.lat, lng = route.start_location.lng });
