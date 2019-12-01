@@ -1,5 +1,4 @@
-﻿using System;
-namespace XFMapsSample.Services
+﻿namespace XFMapsSample.Services
 {
     public class ApiParameter
     {

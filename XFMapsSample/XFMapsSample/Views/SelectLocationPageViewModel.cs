@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using Xamarin.Forms.Maps;
 using XFMapsSample.Models;
 using XFMapsSample.Services;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Content;
+﻿using Android.Content;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using Xamarin.Forms;
@@ -52,7 +51,8 @@ namespace XFMapsSample.Droid.CustomRenderer
             map.UiSettings.MapToolbarEnabled = false;
             if (FormsMap.RoutePins != null && FormsMap.RoutePins.Count > 1)
             {
-                var polylineOptions = new PolylineOptions();                polylineOptions.InvokeColor(Color.Red.ToAndroid());
+                var polylineOptions = new PolylineOptions();
+                polylineOptions.InvokeColor(Color.Red.ToAndroid());
                 foreach (var pins in FormsMap.RoutePins)
                 {
                     polylineOptions.Add(new LatLng(pins.Position.Latitude, pins.Position.Longitude));
